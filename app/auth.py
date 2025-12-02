@@ -1,0 +1,12 @@
+from fastapi import Depends, HTTPException
+from starlette import status
+from model import AuthToken, connect_db
+
+def check_auth_token(token: str, database=Depends(connect_db)):
+    auth_token = database.query(AuthToken).filter(AuthToken.token==token).first()
+    if auth_token:
+        return auth_token
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Could not validate credentials"
+    )

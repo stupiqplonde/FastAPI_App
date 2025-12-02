@@ -1,7 +1,7 @@
 import os
 
-dir_path = os.path.dirname(os.path.realpath(__file__))
-root_path = os.path.dirname(dir_path)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_NAME = 'app.db'
 
-DB_NAME = "app.db"
-DATABASE_URL = f"sqlite:///{root_path}/{DB_NAME}"
+DB_PATH = os.path.join(BASE_DIR, DB_NAME)
+DATABASE_URL = f'sqlite:///{DB_PATH}'
